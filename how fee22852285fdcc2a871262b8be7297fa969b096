@@ -1,0 +1,11 @@
+[33mcommit cd0c300d89850eb19e4153d7e84f83eb6fcd6729[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: tiencong2k5 <phamthanhvp75@gmail.com>
+Date:   Wed Oct 2 04:34:32 2024 +0700
+
+    Xoa cac thu muc
+
+[33mcommit fee22852285fdcc2a871262b8be7297fa969b096[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: tiencong2k5 <phamthanhvp75@gmail.com>
+Date:   Wed Sep 25 13:53:52 2024 +0700
+
+    Initialize project using Create React App
