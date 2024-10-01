@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="title">Hello World</p>
+
+</body>
+<script>
+    //Thay đổi nội dung của một phần tử
+    document.getElementById("title").innerHTML = "Hello, DOM!";
+    //Thay đổi màu sắc của phần tử
+    document.getElementById("title").style.color = "red";
+
+
+
+
+
+    //Đếm số lượng phần tử trong DOM
+    const divCount = document.getElementsByTagName("div").length;
+    console.log("Number of <div> elements: " + divCount);
+
+    //Thay đổi nội dung bằng cách thao tác với Class
+
+
+    const items = document.getElementsByClassName("item");
+    for (let i = 0; i < items.length; i++) {
+        items[i].innerHTML = "Updated item";
+    }
+
+
+
+
+
+</script>
+</html>

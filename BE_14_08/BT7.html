@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h id="info">Tôi là sinh viên PTIT</h>
+    <p id="info">Sinh viên ngành UDU</p>
+    <p id="info">Sinh viên năm hai</p>
+    <button id="change">Change</button>
+    <script>
+        document.getElementById("change").addEventListener("click", function(){
+            const number=document.getElementsByTagName("p");
+            for (let i=0 ;i < number.length ; i++) {
+                number[i].innerHTML= "Updated paragraph";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm số phần tử div </title>
+</head>
+<body>
+
+    <div id="container">
+        <div class=""></div>
+        <div class=""></div>
+        <div class=""></div>
+        <div class=""></div>
+        <div class=""></div>
+    </div>
+
+    <button id="number">Số phần tử div</button>
+
+    <script>
+        document.getElementById("number").addEventListener("click",function(){
+            const numberofDiv= document.getElementById("container").getElementsByTagName("div").length;
+            alert("Số phần tử div trong container là " + numberofDiv);
+        });
+    </script>
+</body>
+</html>

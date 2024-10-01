@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=script, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list">
+        <li>Một</li>
+        <li>Hai</li>
+        <li>Ba</li>
+    </ul>
+    <script>
+        //Thêm phần tử mới vào DOM
+        const newItem = document.createElement("li");
+        newItem.innerHTML = "New List Item";
+        document.getElementById("list").appendChild(newItem);
+
+    </script>
+</body>
+</html>
