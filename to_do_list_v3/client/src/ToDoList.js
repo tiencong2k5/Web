@@ -10,12 +10,12 @@ const ToDoList = () => {
   const [task, setTask] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/todos")
+      .get("http://localhost:3001/api/todos")
       .then((response) => {
         setTask(response.data);
       })
       .catch((error) => console.error("Lỗi khi tải dữ liệu:", error));
-  }, []);
+  }, [task]);
   //Hiển thị form
   const [showForm, setShowForm] = useState(false);
 
@@ -35,9 +35,9 @@ const ToDoList = () => {
   // Hàm thêm mới nhiệm vụ
   const addTask = (newTask) => {
     axios
-      .post("http://localhost:3000/api/todos", newTask)
+      .post("http://localhost:3001/api/todos", newTask)
       .then((response) => {
-        setTask([...task, response.data]);
+        setTask((prevTasks) => [...prevTasks, response.data]);
       })
       .catch((error) => console.error("Lỗi khi thêm dữ liệu:", error));
 
@@ -47,7 +47,7 @@ const ToDoList = () => {
   // Xóa nhiệm vụ
   const deleteTask = (id) => {
     axios
-      .delete(`http://localhost:3000/api/todos/${id}`)
+      .delete(`http://localhost:3001/api/todos/${id}`)
       .then(() => {
         setTask(task.filter((task) => task.id !== id));
       })
@@ -57,7 +57,7 @@ const ToDoList = () => {
 
   const updateTask = (id, editTask) => {
     axios
-      .put(`http://localhost:3000/api/todos/${id}`, editTask)
+      .put(`http://localhost:3001/api/todos/${id}`, editTask)
       .then((response) => {
         setTask(task.map((item) => (item.id === id ? response.data : item)));
       })
@@ -66,11 +66,15 @@ const ToDoList = () => {
 
   // Đánh dấu hoàn thành
   const toggleCompletion = (id) => {
-    setTask(
-      task.map((item) =>
-        item.id === id ? { ...item, completed: !item.completed } : item
-      )
-    );
+    const taskToToggle = task.find((item) => item.id === id);
+    const updatedTask = { ...taskToToggle, completed: !taskToToggle.completed };
+
+    axios
+      .put(`http://localhost:3001/api/todos/${id}`, updatedTask)
+      .then((response) => {
+        setTask(task.map((item) => (item.id === id ? response.data : item)));
+      })
+      .catch((error) => console.error("Lỗi khi cập nhật trạng thái:", error));
   };
 
   // Hàm Khôi Phục đánh dấu
@@ -89,6 +93,7 @@ const ToDoList = () => {
         {/* {trong JSX khoog sử dụng vòng for mà sử dụng map}       */}
         {task.map((item) => (
           <ToDoItem
+            key={item.id} // đặt thuộc tính key duy nhất cho các phần tử con trong danh sách
             id={item.id} // Thêm key cho mỗi phần tử
             content={item.content} // Cú pháp đúng để truyền props
             deadline={item.deadline}
@@ -134,6 +139,7 @@ function TaskForm({ onClose, addTask }) {
     };
     // Thêm logic lưu thông tin vào state chính hoặc API tại đây
     addTask(newTask); // Thêm nhiệm vụ vào danh sách
+    // setTask((prev) => [...prev, newTask]);
     setContent(""); // Xóa trắng nội dung sau khi thêm
     setDeadline("");
   };

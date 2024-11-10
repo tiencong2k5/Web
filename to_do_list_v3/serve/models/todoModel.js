@@ -2,22 +2,30 @@ const db = require("../config/db");
 
 const todoModel = {
   getAll: (callback) => {
-    db.query("SELECT * FROM todolist", callback);
-  },
-  create: (title, due_date, callback) => {
     db.query(
-      "INSERT INTO todolist(title, due_date)  VALUES (? , ?)",
-      [title, due_date],
+      "SELECT id, content, DATE_FORMAT(deadline, '%Y-%m-%d') as deadline, completed FROM todolist",
       callback
     );
   },
-  update: (id, title, due_date, completed, callback) => {
+
+  create: (content, deadline, callback) => {
+    const formattedDueDate = new Date(deadline).toISOString().split("T")[0];
     db.query(
-      "UPDATE todolist SET title = ? , due_date = ? , completed = ? WHERE id = ?",
-      [title, due_date, completed, id],
+      "INSERT INTO todolist(content, deadline) VALUES (?, ?)",
+      [content, formattedDueDate],
       callback
     );
   },
+
+  update: (id, content, deadline, completed, callback) => {
+    const formattedDueDate = new Date(deadline).toISOString().split("T")[0];
+    db.query(
+      "UPDATE todolist SET content = ?, deadline = ?, completed = ? WHERE id = ?",
+      [content, formattedDueDate, completed, id],
+      callback
+    );
+  },
+
   delete: (id, callback) => {
     db.query("DELETE FROM todolist WHERE id = ? ", [id], callback);
   },

@@ -13,8 +13,8 @@ exports.getAllToDo = (req, res) => {
 };
 
 exports.createToDo = (req, res) => {
-  const { title, due_date } = req.body;
-  todoModel.create(title, due_date, (err, results) => {
+  const { content, deadline } = req.body;
+  todoModel.create(content, deadline, (err, results) => {
     if (err)
       return res.status(500).json({
         status: "error",
@@ -27,8 +27,8 @@ exports.createToDo = (req, res) => {
 
 exports.updateToDo = (req, res) => {
   const { id } = req.params;
-  const { title, due_date, completed } = req.body;
-  todoModel.update(id, title, due_date, completed, (err, results) => {
+  const { content, deadline, completed } = req.body;
+  todoModel.update(id, content, deadline, completed, (err, results) => {
     if (err)
       return res.status(500).json({
         status: "error",

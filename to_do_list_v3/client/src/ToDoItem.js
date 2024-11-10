@@ -7,11 +7,10 @@ import {
 import "./style.css";
 import { format } from "date-fns";
 const ToDoItem = (props) => {
-  const dueDateFormat = format(new Date(props.deadline), "dd MM yyyy");
   // State để chuyển đổi giữa chế độ xem và chế độ chỉnh sửa
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewConTent] = useState(props.content);
-  const [newDeadline, setNewDeadline] = useState(dueDateFormat);
+  const [newDeadline, setNewDeadline] = useState(props.deadline);
 
   // Hàm lưu công việc mới khi chỉnh sửa
   const saveTask = () => {
@@ -25,23 +24,37 @@ const ToDoItem = (props) => {
 
   return (
     <div className="ToDoItem">
-      {props.completed ? (
-        <CheckCircleOutlined
-          checked={props.completed}
-          onClick={() => props.toggleCompletion(props.id)}
-          style={{
-            marginRight: "5px",
-            cursor: "pointer",
-            color: "#28a745",
-          }}
-        />
-      ) : (
+      <div className="checkbox-container">
         <input
           type="checkbox"
           checked={props.completed}
           onChange={() => props.toggleCompletion(props.id)}
+          style={{ display: "none" }}
         />
-      )}
+        {props.completed ? (
+          <CheckCircleOutlined
+            onClick={() => props.toggleCompletion(props.id)}
+            style={{
+              marginRight: "5px",
+              cursor: "pointer",
+              color: "#28a745",
+            }}
+          />
+        ) : (
+          <div
+            className="custom-checkbox"
+            onClick={() => props.toggleCompletion(props.id)}
+            style={{
+              width: "16px",
+              height: "16px",
+              border: "1px solid #ccc",
+              borderRadius: "3px",
+              cursor: "pointer",
+              marginRight: "5px",
+            }}
+          />
+        )}
+      </div>
       <div
         className="ItemContent"
         style={{ textDecoration: props.completed ? "line-through" : "none" }}
