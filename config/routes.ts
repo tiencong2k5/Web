@@ -1,4 +1,6 @@
-﻿export default [
+﻿import path from 'path';
+
+export default [
 	{
 		path: '/user',
 		layout: false,
@@ -35,6 +37,12 @@
 		name: 'RandomUser',
 		component: './RandomUser',
 		icon: 'ArrowsAltOutlined',
+	},
+	{
+		path: '/quan-li-khoa-hoc',
+		name: 'Quản lí khóa học',
+		component: './QuanLiKhoaHoc/CourseList',
+		icon: '',
 	},
 
 	// DANH MUC HE THONG
